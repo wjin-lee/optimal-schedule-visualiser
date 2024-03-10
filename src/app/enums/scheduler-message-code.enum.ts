@@ -1,0 +1,7 @@
+export enum SchedulerMessageCode {
+    ERROR = "ERROR",
+    NO_OPTIMAL_FOUND = "NO_OPTIMAL_FOUND",
+    OPTIMAL_FOUND = "OPTIMAL_SCHEDULE",
+    TASK_COUNT = "TASK_COUNT",
+    RESOURCE_UPDATE = "RESOURCE"
+}

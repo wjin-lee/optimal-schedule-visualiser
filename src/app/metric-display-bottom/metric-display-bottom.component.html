@@ -1,0 +1,16 @@
+<div class="absolute bottom-0 flex w-full justify-center items-stretch gap-4 mb-2 overflow-hidden">
+    <div class="min-h-[1em] w-px self-stretch bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-20 dark:opacity-100"></div>
+    <div class="flex flex-col items-center align-middle min-w-[20%] bg-gradient-to-r from-transparent via-[#111212] to-transparent">
+        <p class="jura text-white text-lg text-center">CPU</p>
+        <p class="jura text-white text-base ">{{ cpuUsage == INFINITY ? "-" : (cpuUsage + "%") }}</p>
+    </div>
+    <div class="min-h-[1em] w-px self-stretch bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-20 dark:opacity-100"></div>
+    <div class="flex flex-col items-center align-middle min-w-[20%] bg-gradient-to-r from-transparent via-[#111212] to-transparent ">
+        <p class="jura text-white text-lg text-center">Memory</p>
+        <p class="jura text-white text-base ">{{ memoryUsage == INFINITY ? "-" : (memoryUsage + "%") }}</p>
+    </div>
+    <div class="min-h-[1em] w-px self-stretch bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-20 dark:opacity-100"></div>
+</div>
+
+
+

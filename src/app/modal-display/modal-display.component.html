@@ -1,0 +1,51 @@
+<ng-template #tplCloseBtn>
+    <!-- Adapted from https://tailwindflex.com/leon-bachmann/glowing-backround-button -->
+    <div class="relative inline-flex group my-7" (click)="modalService.closeModal()"> 
+        <div class="px-10 py-2 rounded-md absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#ff5e5e] via-[#ff5e5e] to-[#dc7b7b] blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
+        <div class="px-10 py-2 rounded-md jura text-center relative cursor-pointer inline-flex items-center justify-center text-lg text-white transition-all duration-200 bg-[#060707d3] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
+            C L O S E
+        </div>
+    </div>
+</ng-template>
+
+
+<div class="absolute w-full h-full flex justify-center items-center align-middle" *ngIf="modalTemplate != modalTemplateTypes.HIDDEN">
+    <div class="w-[80%] h-[80%] flex items-center justify-center bg-[#060707d3] rounded-lg border-[#fafafa40] border-2">
+        <ng-container *ngIf="modalTemplate == modalTemplateTypes.LOADING">
+            <div class="loader"></div>
+            <!-- Loader is only used for one task atm. Generalise if required. -->
+            <span class="jura absolute text-white text-center">Awaiting <br> Task Count</span>
+            <span class="jura w-[70%] absolute top-2/3 text-gray-300 text-center"><b>NOTE: Task count is only sent by the scheduler at the start of the application.</b><br>Restart the Java application if neccessary.</span>
+        </ng-container>
+
+        <ng-container *ngIf="modalTemplate == modalTemplateTypes.START">
+            <!-- Adapted from https://tailwindflex.com/leon-bachmann/glowing-backround-button -->
+            <div class="relative inline-flex group" (click)="onStartBtnClicked()"> 
+                <div class="w-52 h-52 rounded-full absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#5bff8f] via-[#5eff91] to-[#7bdc99] blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
+                <div class="w-52 h-52 rounded-full jura text-center relative cursor-pointer inline-flex items-center justify-center px-8 py-4 text-lg text-white transition-all duration-200 bg-[#060707d3] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
+                    B E G I N <br> S E A R C H
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="modalTemplate == modalTemplateTypes.SUMMARY">
+            <div class="flex flex-col w-full h-full items-center gap-3">
+                <span class="jura m-2 text-white font-bold text-2xl">OPTIMAL SCHEDULE FOUND</span>
+                <span class="jura m-2 text-white font-bold text-xl">Schedule Length: {{modalService.optimalSchedule.cost}} </span>
+                <app-schedule-visualiser class="w-[80%] h-[60%] px-8 overflow-scroll grid place-items-center"></app-schedule-visualiser>
+                <span class="jura m-2 text-gray-300 text-base"> Tip: This window can be reopened by clicking on the optimal node! </span>
+                <ng-template *ngTemplateOutlet="tplCloseBtn"></ng-template>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="modalTemplate == modalTemplateTypes.SCHEDULER_EXCEPTION">
+            <div class="flex flex-col items-center gap-3 w-[80%]">
+                <span class="jura text-white font-bold text-2xl">{{ modalService.schedulerException.title }}</span>
+                <br>
+                <span class="jura text-white text-center">{{ modalService.schedulerException.text }}</span>
+                <br>
+                <ng-template *ngTemplateOutlet="tplCloseBtn"></ng-template>
+            </div>
+        </ng-container>
+    </div>
+</div>
